@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def index(request):
-    print(dir(request))
-    return HttpResponse('Hello Max')
+from .models import News
 
-def test(request):
-    return HttpResponse('<h2>Test page</h2>')
+def index(request):
+    news = News.objects.all()
+    title = 'Main page'
+    return render(request, 'news/index.html', {'news': news, 'title': title})
+
